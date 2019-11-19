@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Xxx  -  description
+                           Trajet  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if ! defined ( XXX_H )
-#define XXX_H
+//---------- Interface de la classe <Trajet> (fichier Trajet.h) ----------------
+#if ! defined ( TRAJET_H )
+#define TRAJET_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
+// Rôle de la classe <Trajet>
 //
 //
 //------------------------------------------------------------------------
 
-class Xxx : public Ancetre
+class Trajet
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -34,9 +34,15 @@ public:
     // Contrat :
     //
 
+    void AfficherTrajet() const = 0;
+    // Mode d'emploi :
+    // Permet d'afficher le trajet, qu'il soit simple ou composé
+    //
+    // Contrat :
+    // La méthode doit être redéfinie dans les classes filles
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Xxx & operator = ( const Xxx & unXxx );
+    Trajet & operator = ( const Trajet & unTrajet );
     // Mode d'emploi :
     //
     // Contrat :
@@ -44,23 +50,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Xxx ( const Xxx & unXxx );
+    Trajet ( const Trajet & unTrajet );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Xxx ( );
+    Trajet ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    //  Initialise la ville de départ et d'arrivée
 
-    virtual ~Xxx ( );
+    virtual ~Trajet ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Libère la mémoire utilisée par villeDepart et villeArrivee
 
 //------------------------------------------------------------------ PRIVE
 
@@ -68,10 +70,10 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    char* villeDepart;
+    char* villeArrivee;
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
+//-------------------------------- Autres définitions dépendantes de <Trajet>
 
-#endif // XXX_H
-
+#endif // TRAJET_H

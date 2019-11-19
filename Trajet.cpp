@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Xxx  -  description
+                           Trajet  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//---------- Réalisation de la classe <Trajet> (fichier Trajet.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,22 +15,21 @@ using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "Xxx.h"
+#include "Trajet.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
+// type Trajet::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
-
 //------------------------------------------------- Surcharge d'opérateurs
-Xxx & Xxx::operator = ( const Xxx & unXxx )
+Trajet & Trajet::operator = ( const Trajet & unTrajet )
 // Algorithme :
 //
 {
@@ -38,37 +37,43 @@ Xxx & Xxx::operator = ( const Xxx & unXxx )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Xxx::Xxx ( const Xxx & unXxx )
+Trajet::Trajet ( const Trajet & unTrajet )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
+    cout << "Appel au constructeur de copie de <Trajet>" << endl;
 #endif
-} //----- Fin de Xxx (constructeur de copie)
+} //----- Fin de Trajet (constructeur de copie)
 
 
-Xxx::Xxx ( )
+Trajet::Trajet ( const char* depart, const char* arrivee )
 // Algorithme :
-//
+//  Aucun
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
-#endif
-} //----- Fin de Xxx
+  #ifdef MAP
+      cout << "Appel au constructeur de <Trajet>" << endl;
+  #endif
+  this->villeDepart = new char[strlen(depart)+1];
+  this->villeDepart = strcpy(this->villeDepart,depart);
+
+  this->villeArrivee = new char[strlen(arrivee)+1];
+  this->villeArrivee = strcpy(this->villeArrivee,arrivee);
+} //----- Fin de Trajet
 
 
-Xxx::~Xxx ( )
+Trajet::~Trajet ( )
 // Algorithme :
-//
+// Aucun
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
-#endif
-} //----- Fin de ~Xxx
+  #ifdef MAP
+      cout << "Appel au destructeur de <Trajet>" << endl;
+  #endif
+  delete[] this->villeDepart;
+  delete[] this->villeArrivee;
+} //----- Fin de ~Trajet
 
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

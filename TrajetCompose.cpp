@@ -1,36 +1,50 @@
 /*************************************************************************
-                           Xxx  -  description
+                           TrajetCompose  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//---------- Réalisation de la classe <TrajetCompose> (fichier TrajetCompose.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <cstring>
 
 //------------------------------------------------------ Include personnel
-#include "Xxx.h"
+#include "TrajetCompose.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
+// type TrajetCompose::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
+void TrajetCompose :: AfficherTrajet() const
+// Algorithme :
+// Aucun
+{
+  int nbTrajets = sizeof(this->listeTrajetSimple)/sizeof(TrajetSimple);
+  for(int i=0;i<nbTrajets;i++)
+  {
+    this->listeTrajetSimple[i].AfficherTrajet();
+    if(i!=(nbTrajets-1)
+      cout<<" - ";
+  }
+  cout<<endl;
+};
 
 //------------------------------------------------- Surcharge d'opérateurs
-Xxx & Xxx::operator = ( const Xxx & unXxx )
+TrajetCompose & TrajetCompose::operator = ( const TrajetCompose & unTrajetCompose )
 // Algorithme :
 //
 {
@@ -38,37 +52,47 @@ Xxx & Xxx::operator = ( const Xxx & unXxx )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Xxx::Xxx ( const Xxx & unXxx )
+TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose )
 // Algorithme :
 //
 {
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
-#endif
-} //----- Fin de Xxx (constructeur de copie)
+  #ifdef MAP
+      cout << "Appel au constructeur de copie de <TrajetCompose>" << endl;
+  #endif
+
+} //----- Fin de TrajetCompose (constructeur de copie)
 
 
-Xxx::Xxx ( )
+TrajetCompose::TrajetCompose ( const char* depart,const char* arrivee, const TrajetSimple* listeTrajet )
 // Algorithme :
-//
+//    Aucun
+  :Trajet(depart,arrivee)
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
-#endif
-} //----- Fin de Xxx
+  #ifdef MAP
+      cout << "Appel au constructeur de <TrajetCompose>" << endl;
+  #endif
+
+  unsigned int nbTrajets = sizeof(listeTrajet)/sizeof(TrajetSimple);
+  this->listeTrajetSimple = new TrajetSimple[nbTrajets];
+  for(int i=0;i<nbTrajets;i++)
+  {
+    this->listeTrajetSimple[i](listeTrajet[i]);
+  }
+
+} //----- Fin de TrajetCompose
 
 
-Xxx::~Xxx ( )
+TrajetCompose::~TrajetCompose ( )
 // Algorithme :
-//
+//  Aucun
 {
-#ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
-#endif
-} //----- Fin de ~Xxx
+  #ifdef MAP
+      cout << "Appel au destructeur de <TrajetCompose>" << endl;
+  #endif
+  delete[] this->listeTrajetSimple;
+} //----- Fin de ~TrajetCompose
 
 
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

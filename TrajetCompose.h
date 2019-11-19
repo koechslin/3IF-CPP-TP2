@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Xxx  -  description
+                           TrajetCompose  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if ! defined ( XXX_H )
-#define XXX_H
+//---------- Interface de la classe <TrajetCompose> (fichier TrajetCompose.h) ----------------
+#if ! defined ( TRAJETCOMPOSE_H )
+#define TRAJETCOMPOSE_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -18,11 +18,11 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Xxx>
-//
-//
+//    Cette classe permet de créer un trajet composé, constitué de plusieurs trajets simples,
+//    et d'afficher les trajets simples successifs ainsi que leur moyen de transport associé
 //------------------------------------------------------------------------
 
-class Xxx : public Ancetre
+class TrajetCompose : public Trajet
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -33,10 +33,12 @@ public:
     //
     // Contrat :
     //
-
+    virtual void AfficherTrajet() const;
+    // Mode d'emploi :
+    //    Affiche l'ensemble des trajets simples, et leur moyen de transport, constituant le trajet composé
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Xxx & operator = ( const Xxx & unXxx );
+    TrajetCompose & operator = ( const TrajetCompose & unTrajetCompose );
     // Mode d'emploi :
     //
     // Contrat :
@@ -44,23 +46,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Xxx ( const Xxx & unXxx );
+    TrajetCompose ( const TrajetCompose & unXxx );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Xxx ( );
+    TrajetCompose (const char* depart,const char* arrivee, const TrajetSimple* listeTrajet );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    //    Construit un trajet composé à partir du point de départ, d'arrivée, et de la liste des trajets simples le constituant
 
-    virtual ~Xxx ( );
+    virtual ~TrajetCompose ( );
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    //    Détruit le trajet composé en libérant de la mémoire le tableau de trajet simple
 
 //------------------------------------------------------------------ PRIVE
 
@@ -68,10 +66,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-
+    TrajetSimple* listeTrajetSimple;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>
 
-#endif // XXX_H
-
+#endif // TRAJETCOMPOSE_H
