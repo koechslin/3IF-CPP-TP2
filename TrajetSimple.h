@@ -7,9 +7,9 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if ! defined (TRAJETSIMPLE_H )
+#if ! defined (TRAJETSIMPLE_H)
 #define TRAJETSIMPLE_H
-
+#include "Trajet.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes

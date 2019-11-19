@@ -17,6 +17,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"
+
 #include "TrajetSimple.h"
 
 
@@ -71,7 +72,7 @@ TrajetSimple::TrajetSimple (const char* depart,const char* arrive,const char* mo
 
 void TrajetSimple::AfficherTrajet ()const {
 
-	cout << " de " << this->villeDepart << " à " << this->villeArrivee << " en " << this->moyenTransport<<endl;
+	cout << "de " << this->villeDepart << " à " << this->villeArrivee << " en " << this->moyenTransport;
 
 }
 

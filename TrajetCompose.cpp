@@ -35,31 +35,28 @@ void TrajetCompose :: AfficherTrajet() const
 // Algorithme :
 // Aucun
 {
-  int nbTrajets = sizeof(this->listeTrajetSimple)/sizeof(TrajetSimple);
   int i=0;
-  for(i=0;i<nbTrajets;i++)
+  for(i=0;i<this->nbTrajetSimple;i++)
   {
     this->listeTrajetSimple[i].AfficherTrajet();
-    if(i!=(nbTrajets-1))
+    if(i!=(this->nbTrajetSimple-1))
       cout<<" - ";
   }
-  cout<<endl;
 }
 
 
 //-------------------------------------------- Constructeurs - destructeur
 
 
-TrajetCompose::TrajetCompose ( const char* depart,const char* arrivee, const TrajetSimple* listeTrajet )
+TrajetCompose::TrajetCompose ( const char* depart,const char* arrivee, const TrajetSimple* listeTrajet,int nbTrajets )
 // Algorithme :
 //    Aucun
-  :Trajet(depart,arrivee)
+  :Trajet(depart,arrivee),nbTrajetSimple(nbTrajets)
 {
   #ifdef MAP
       cout << "Appel au constructeur de <TrajetCompose>" << endl;
   #endif
-
-  int nbTrajets = sizeof(listeTrajet)/sizeof(TrajetSimple);
+  
   this->listeTrajetSimple = new TrajetSimple[nbTrajets];
   for(int i=0;i<nbTrajets;i++)
   {

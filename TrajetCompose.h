@@ -9,7 +9,8 @@
 //---------- Interface de la classe <TrajetCompose> (fichier TrajetCompose.h) ----------------
 #if ! defined ( TRAJETCOMPOSE_H )
 #define TRAJETCOMPOSE_H
-
+#include "Trajet.h"
+#include "TrajetSimple.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
@@ -40,7 +41,7 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose (const char* depart,const char* arrivee, const TrajetSimple* listeTrajet );
+    TrajetCompose (const char* depart,const char* arrivee, const TrajetSimple* listeTrajet,int nbTrajets );
     // Mode d'emploi :
     //    Construit un trajet composé à partir du point de départ, d'arrivée, et de la liste des trajets simples le constituant
 
@@ -55,6 +56,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
     TrajetSimple* listeTrajetSimple;
+    int nbTrajetSimple;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Xxx>
