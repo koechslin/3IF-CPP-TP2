@@ -37,20 +37,8 @@ public:
     // Mode d'emploi :
     //    Affiche l'ensemble des trajets simples, et leur moyen de transport, constituant le trajet composé
 
-//------------------------------------------------- Surcharge d'opérateurs
-    TrajetCompose & operator = ( const TrajetCompose & unTrajetCompose );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
-    TrajetCompose ( const TrajetCompose & unXxx );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
     TrajetCompose (const char* depart,const char* arrivee, const TrajetSimple* listeTrajet );
     // Mode d'emploi :

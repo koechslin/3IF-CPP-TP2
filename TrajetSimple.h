@@ -7,8 +7,8 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if ! defined (TrajetSimple_H )
-#define trajetSimple_H
+#if ! defined (TRAJETSIMPLE_H )
+#define TRAJETSIMPLE_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -31,17 +31,11 @@ public:
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
-    // Contrat : 
+    // Contrat :
     //
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    TrajetSimple & operator = ( const TrajetSimple & unTrajetSimple );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
     TrajetSimple ( const TrajetSimple & unTrajetSimple );
@@ -50,8 +44,11 @@ public:
     // Contrat :
     //
 
+    TrajetSimple (){};
+    // Mode d'emploi : Constructeur par défaut de TrajetSimple
+
     TrajetSimple (const char* depart,const char* arrive ,const char * moyenTransport);
-    // Mode d'emploi : Construit un trajet simple qui contient une ville de départ, une ville d'arrivée et un moyen de transport 
+    // Mode d'emploi : Construit un trajet simple qui contient une ville de départ, une ville d'arrivée et un moyen de transport
     //
     // Contrat :
     //
@@ -79,4 +76,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <Xxx>
 
 #endif // XXX_H
-

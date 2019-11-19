@@ -16,7 +16,9 @@ using namespace std;
 #include <cstring>
 
 //------------------------------------------------------ Include personnel
+#include "Trajet.h"
 #include "TrajetSimple.h"
+
 
 
 //------------------------------------------------------------- Constantes
@@ -32,23 +34,19 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-TrajetSimple & TrajetSimple::operator = ( const TrajetSimple & unTrajetSimple )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
 TrajetSimple::TrajetSimple ( const TrajetSimple & unTrajetSimple )
 // Algorithme :
 //
+ :Trajet(unTrajetSimple.villeDepart,unTrajetSimple.villeArrivee)
 {
-	 
-	 strcpy(this->villeDepart,unTrajetSimple.villeDepart);
-	 strcpy(this->villeArrivee,unTrajetSimple.villeArrivee);
+
+	 //strcpy(this->villeDepart,unTrajetSimple.villeDepart);
+	 //strcpy(this->villeArrivee,unTrajetSimple.villeArrivee);
 	 strcpy(this->moyenTransport, unTrajetSimple.moyenTransport);
-	
+
 
 #ifdef MAP
     cout << "Appel au constructeur de copie de <TrajetSimple>" << endl;
@@ -61,11 +59,11 @@ TrajetSimple::TrajetSimple ( const TrajetSimple & unTrajetSimple )
 TrajetSimple::TrajetSimple (const char* depart,const char* arrive,const char* moyenTransport)
 // Algorithme :
 //
+ : Trajet(depart, arrive)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <TrajetSimple>" << endl;
 #endif
-	Trajet::Trajet(depart, arrive);
 	this->moyenTransport = new char [strlen(moyenTransport) + 1];
 	strcpy(this->moyenTransport, moyenTransport);
 
@@ -91,4 +89,3 @@ TrajetSimple::~TrajetSimple ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

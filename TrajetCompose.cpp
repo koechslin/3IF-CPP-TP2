@@ -16,6 +16,8 @@ using namespace std;
 #include <cstring>
 
 //------------------------------------------------------ Include personnel
+#include "Trajet.h"
+#include "TrajetSimple.h"
 #include "TrajetCompose.h"
 
 //------------------------------------------------------------- Constantes
@@ -34,33 +36,18 @@ void TrajetCompose :: AfficherTrajet() const
 // Aucun
 {
   int nbTrajets = sizeof(this->listeTrajetSimple)/sizeof(TrajetSimple);
-  for(int i=0;i<nbTrajets;i++)
+  int i=0;
+  for(i=0;i<nbTrajets;i++)
   {
     this->listeTrajetSimple[i].AfficherTrajet();
-    if(i!=(nbTrajets-1)
+    if(i!=(nbTrajets-1))
       cout<<" - ";
   }
   cout<<endl;
-};
-
-//------------------------------------------------- Surcharge d'opérateurs
-TrajetCompose & TrajetCompose::operator = ( const TrajetCompose & unTrajetCompose )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
+}
 
 
 //-------------------------------------------- Constructeurs - destructeur
-TrajetCompose::TrajetCompose ( const TrajetCompose & unTrajetCompose )
-// Algorithme :
-//
-{
-  #ifdef MAP
-      cout << "Appel au constructeur de copie de <TrajetCompose>" << endl;
-  #endif
-
-} //----- Fin de TrajetCompose (constructeur de copie)
 
 
 TrajetCompose::TrajetCompose ( const char* depart,const char* arrivee, const TrajetSimple* listeTrajet )
@@ -72,11 +59,11 @@ TrajetCompose::TrajetCompose ( const char* depart,const char* arrivee, const Tra
       cout << "Appel au constructeur de <TrajetCompose>" << endl;
   #endif
 
-  unsigned int nbTrajets = sizeof(listeTrajet)/sizeof(TrajetSimple);
+  int nbTrajets = sizeof(listeTrajet)/sizeof(TrajetSimple);
   this->listeTrajetSimple = new TrajetSimple[nbTrajets];
   for(int i=0;i<nbTrajets;i++)
   {
-    this->listeTrajetSimple[i](listeTrajet[i]);
+    this->listeTrajetSimple[i]=(listeTrajet[i]);
   }
 
 } //----- Fin de TrajetCompose
