@@ -1,28 +1,30 @@
 /*************************************************************************
-                           Xxx  -  description
+                           TrajetSimple  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Xxx> (fichier Xxx.cpp) ------------
+//---------- Réalisation de la classe <TrajetSimple> (fichier TrajetSimple.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <cstring>
 
 //------------------------------------------------------ Include personnel
-#include "Xxx.h"
+#include "TrajetSimple.h"
+
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Xxx::Méthode ( liste des paramètres )
+// type TrajetSimple::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
@@ -30,7 +32,7 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Xxx & Xxx::operator = ( const Xxx & unXxx )
+TrajetSimple & TrajetSimple::operator = ( const TrajetSimple & unTrajetSimple )
 // Algorithme :
 //
 {
@@ -38,34 +40,52 @@ Xxx & Xxx::operator = ( const Xxx & unXxx )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Xxx::Xxx ( const Xxx & unXxx )
+TrajetSimple::TrajetSimple ( const TrajetSimple & unTrajetSimple )
+// Algorithme :
+//
+{
+	 
+	 strcpy(this->villeDepart,unTrajetSimple.villeDepart);
+	 strcpy(this->villeArrivee,unTrajetSimple.villeArrivee);
+	 strcpy(this->moyenTransport, unTrajetSimple.moyenTransport);
+	
+
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <TrajetSimple>" << endl;
+#endif
+
+} //----- Fin de TrajetSimple (constructeur de copie)
+
+
+
+TrajetSimple::TrajetSimple (const char* depart,const char* arrive,const char* moyenTransport)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Xxx>" << endl;
+    cout << "Appel au constructeur de <TrajetSimple>" << endl;
 #endif
-} //----- Fin de Xxx (constructeur de copie)
+	Trajet::Trajet(depart, arrive);
+	this->moyenTransport = new char [strlen(moyenTransport) + 1];
+	strcpy(this->moyenTransport, moyenTransport);
 
+} //----- Fin de TrajetSimple
 
-Xxx::Xxx ( )
+void TrajetSimple::AfficherTrajet ()const {
+
+	cout << " de " << this->villeDepart << " à " << this->villeArrivee << " en " << this->moyenTransport<<endl;
+
+}
+
+TrajetSimple::~TrajetSimple ( )
 // Algorithme :
 //
 {
+	delete [] this->moyenTransport ;
 #ifdef MAP
-    cout << "Appel au constructeur de <Xxx>" << endl;
+    cout << "Appel au destructeur de <TrajetSimple>" << endl;
 #endif
-} //----- Fin de Xxx
-
-
-Xxx::~Xxx ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au destructeur de <Xxx>" << endl;
-#endif
-} //----- Fin de ~Xxx
+} //----- Fin de ~TrajetSimple
 
 
 //------------------------------------------------------------------ PRIVE
