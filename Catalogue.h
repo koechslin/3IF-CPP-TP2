@@ -1,15 +1,17 @@
 /*************************************************************************
-                           Xxx  -  description
+                           Catalogue  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if ! defined ( XXX_H )
-#define XXX_H
-
+//---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------------
+#if ! defined ( Catalogue_H )
+#define Catalogue_H
+#include "Trajet.h"
+#include "TrajetSimple.h"
+#include "TrajetCompose.h"
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
@@ -17,12 +19,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
+// Rôle de la classe <Catalogue>
 //
 //
 //------------------------------------------------------------------------
 
-class Xxx : public Ancetre
+class Catalogue 
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -33,10 +35,16 @@ public:
     //
     // Contrat :
     //
+	
 
+	void Rechercher(char* depart, char* arrivee);
+
+	int Ajouter(Trajet  & monTrajet);
+
+	int VerifieCoherenceTrajetCompose(char* depart, char* arrivee, TrajetSimple* listeTrajets, int nbTrajets);
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Xxx & operator = ( const Xxx & unXxx );
+    Catalogue & operator = ( const Catalogue & unCatalogue );
     // Mode d'emploi :
     //
     // Contrat :
@@ -44,23 +52,36 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Xxx ( const Xxx & unXxx );
+    Catalogue ( const Catalogue & unCatalogue );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Xxx ( );
+    Catalogue ( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+	Catalogue(int nbTrajetsMax);
+	
+
+
+	
+
+
+
+    virtual ~Catalogue ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Xxx ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+	//Trajet** getListeTrajets() { return listeTrajets; }
+	//int GetNbTrajetsAct() { return nbTrajetsAct; }
+	//int GetNbTrajetsMax() { return nbTrajetsMax; }
+
+	
 
 //------------------------------------------------------------------ PRIVE
 
@@ -68,6 +89,9 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
+	Trajet** listeTrajets;
+	int nbTrajetsMax;
+	int nbTrajetsAct;
 
 };
 

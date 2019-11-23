@@ -7,9 +7,10 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
-#if ! defined (TRAJETSIMPLE_H)
+#if ! defined (TRAJETSIMPLE_H )
 #define TRAJETSIMPLE_H
-#include "Trajet.h"
+#include "TrajetCompose.h"
+
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
@@ -43,6 +44,10 @@ public:
     //
     // Contrat :
     //
+
+	virtual bool operator==(TrajetSimple & monTrajet) const;
+
+	virtual bool operator==(TrajetCompose & monTrajet) const;
 
     TrajetSimple (){};
     // Mode d'emploi : Constructeur par défaut de TrajetSimple

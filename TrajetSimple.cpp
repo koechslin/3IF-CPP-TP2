@@ -17,7 +17,6 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"
-
 #include "TrajetSimple.h"
 
 
@@ -35,6 +34,20 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
+bool TrajetSimple:: operator==(TrajetSimple & monTrajet) const{
+	if (strcmp(this->villeDepart, monTrajet.villeArrivee) == 0 && strcmp(this->villeArrivee, monTrajet.villeArrivee) == 0 && strcmp(this->moyenTransport, monTrajet.moyenTransport) == 0) 
+	{
+		return true;
+	}
+	return false;
+
+}
+
+bool TrajetSimple:: operator==(TrajetCompose & monTrajet) const {
+
+	return false;
+
+}
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -72,7 +85,7 @@ TrajetSimple::TrajetSimple (const char* depart,const char* arrive,const char* mo
 
 void TrajetSimple::AfficherTrajet ()const {
 
-	cout << "de " << this->villeDepart << " à " << this->villeArrivee << " en " << this->moyenTransport;
+	cout << " de " << this->villeDepart << " à " << this->villeArrivee << " en " << this->moyenTransport<<endl;
 
 }
 
