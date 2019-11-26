@@ -39,6 +39,8 @@ public:
 	bool ComparerTrajet(Trajet & trajet1, Trajet & trajet2) const;
 
 	void RechercheSimple(char* depart, char* arrivee) const;
+	void RechercheCompose(const char* depart,const char* arrivee) const;
+	void Recursive(const char* departIni,const char* depart, const char* arrivee, int* tableHachage,int pronf) const;
 
 	int Ajouter(Trajet  & monTrajet);
 
@@ -47,7 +49,7 @@ public:
 	//int VerifieCoherenceTrajetCompose(char* depart, char* arrivee, TrajetSimple* listeTrajets, int nbTrajets);
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Catalogue & operator = ( const Catalogue & unCatalogue );
+   // Catalogue & operator = ( const Catalogue & unCatalogue );
     // Mode d'emploi :
     //
     // Contrat :

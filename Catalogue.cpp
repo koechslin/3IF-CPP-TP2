@@ -103,6 +103,72 @@ void Catalogue::RechercheSimple(char* depart, char* arrivee) const
 	}
 }
 
+void Catalogue::RechercheCompose(const char* depart,const char* arrivee) const
+{
+	int* tableHachage = new int [this->nbTrajetsAct];
+	for (int a = 0;a < this->nbTrajetsAct;a++) {
+		tableHachage[a] = 0;
+
+	}
+	Recursive(depart,depart, arrivee, tableHachage,1);
+	delete[]tableHachage;
+
+}
+
+
+
+void Catalogue::Recursive(const char* departIni,const char* depart, const char* arrivee, int* tableHachage, int pronf) const
+{
+	
+	for (int i = 0;i < this->nbTrajetsAct;i++)
+	{
+		if(strcmp(this->listeTrajets[i]->getVilleArrivee(), departIni) != 0){
+			if (tableHachage[i] == 0 && strcmp(this->listeTrajets[i]->getVilleDepart(), depart) == 0) {
+				if (strcmp(this->listeTrajets[i]->getVilleArrivee(), arrivee) == 0) {
+
+
+					tableHachage[i] = pronf;
+					cout << "Nouveau Trajet" << endl;
+					for (int x = 1;x <= pronf;x++) {
+						for (int z = 0;z < this->nbTrajetsAct;z++) {
+							if (tableHachage[z] == x) {
+								this->listeTrajets[z]->AfficherTrajet();
+								cout << endl;
+							}
+
+						}
+
+					}
+					
+	
+					tableHachage[i] = 0;
+
+
+				}
+				else {
+					tableHachage[i] = pronf;
+					Recursive(departIni, this->listeTrajets[i]->getVilleArrivee(), arrivee, tableHachage,pronf+1);
+					tableHachage[i] = 0;
+
+
+
+				}
+			}
+			
+
+
+			
+
+		
+			
+		}
+	}
+
+}
+
+
+
+
 void Catalogue::AfficherCatalogue() const
 {
 	cout<<"Les trajets présents dans le catalogue sont les suivants : "<<endl;
@@ -114,11 +180,11 @@ void Catalogue::AfficherCatalogue() const
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
-Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
+//Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
 // Algorithme :
 //
-{
-} //----- Fin de operator =
+//{
+//} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
