@@ -9,6 +9,8 @@
 //---------- Interface de la classe <TrajetCompose> (fichier TrajetCompose.h) ----------------
 #if ! defined ( TRAJETCOMPOSE_H )
 #define TRAJETCOMPOSE_H
+#include "Trajet.h"
+#include "TrajetSimple.h"
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -34,16 +36,14 @@ public:
     // Contrat :
     //
     virtual void AfficherTrajet() const;
-	virtual bool  operator==(TrajetCompose & monTrajet) const ;
-	virtual bool  operator==(TrajetSimple & monTrajet) const ;
-
     // Mode d'emploi :
     //    Affiche l'ensemble des trajets simples, et leur moyen de transport, constituant le trajet composé
 
+    virtual bool  operator==(TrajetCompose & monTrajet) const ;
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose (const char* depart,const char* arrivee, const TrajetSimple* listeTrajet,int nbTrajets);
+    TrajetCompose (const char* depart,const char* arrivee,const TrajetSimple* listeTrajet,int nbTrajets);
     // Mode d'emploi :
     //    Construit un trajet composé à partir du point de départ, d'arrivée, et de la liste des trajets simples le constituant
 
@@ -58,7 +58,7 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
     TrajetSimple* listeTrajetSimple;
-	int nbTrajetSimple;
+	   int nbTrajetSimple;
 
 };
 

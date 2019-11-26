@@ -34,11 +34,10 @@ using namespace std;
 //} //----- Fin de Méthode
 
 
-bool TrajetCompose:: operator==(TrajetCompose & monTrajet) const {
-	int nbTrajetsThis = this->nbTrajetSimple;
-	int nbTrajetsMonTrajet = monTrajet.nbTrajetSimple;
-	if (nbTrajetsThis == nbTrajetsThis) {
-		for (int i = 0;i < nbTrajetsThis;i++) {
+bool TrajetCompose:: operator==(TrajetCompose & monTrajet) const
+{
+	if (this->nbTrajetSimple == monTrajet.nbTrajetSimple) {
+		for (int i = 0;i < this->nbTrajetSimple;i++) {
 			if (this->listeTrajetSimple[i] == monTrajet.listeTrajetSimple[i]) {
 				continue;
 			}
@@ -53,12 +52,6 @@ bool TrajetCompose:: operator==(TrajetCompose & monTrajet) const {
 
 }
 
-bool TrajetCompose:: operator==(TrajetSimple & monTrajet)const {
-
-	return false;
-
-}
-
 
 void TrajetCompose::AfficherTrajet() const
 // Algorithme :
@@ -69,7 +62,7 @@ void TrajetCompose::AfficherTrajet() const
 	{
 		this->listeTrajetSimple[i].AfficherTrajet();
 		if (i != (this->nbTrajetSimple - 1))
-			cout << " - ";
+			cout << " -";
 	}
 }
 
@@ -77,21 +70,30 @@ void TrajetCompose::AfficherTrajet() const
 //-------------------------------------------- Constructeurs - destructeur
 
 
-TrajetCompose::TrajetCompose(const char* depart, const char* arrivee, const TrajetSimple* listeTrajet, int nbTrajets)
+TrajetCompose::TrajetCompose(const char* depart, const char* arrivee,const TrajetSimple* listeTrajet, int nbTrajets)
 // Algorithme :
 //    Aucun
 
 	:Trajet(depart, arrivee), nbTrajetSimple(nbTrajets)
 {
 
-#ifdef MAP
-	cout << "Appel au constructeur de <TrajetCompose>" << endl;
-#endif
+	#ifdef MAP
+		cout << "Appel au constructeur de <TrajetCompose>" << endl;
+	#endif
 
+	cout<<"1"<<endl;
 	this->listeTrajetSimple = new TrajetSimple[nbTrajets];
-	for (int i = 0;i < nbTrajets;i++)
+	cout<<"2"<<endl;
+	/*for (int i = 0;i < nbTrajets;i++)
 	{
 		this->listeTrajetSimple[i] = (listeTrajet[i]);
+	}*/
+	for(int i=0;i<nbTrajets;i++)
+	{
+		cout<<"3"<<endl;
+		//TrajetSimple trajetTemp = TrajetSimple(listeTrajet[i].getVilleDepart(),listeTrajet[i].getVilleArrivee(),listeTrajet[i].getTransport());
+		this->listeTrajetSimple[i].initTrajet(listeTrajet[i].getVilleDepart(),listeTrajet[i].getVilleArrivee(),listeTrajet[i].getTransport());
+		cout<<"4"<<endl;
 	}
 
 } //----- Fin de TrajetCompose
@@ -111,4 +113,3 @@ TrajetCompose::~TrajetCompose()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

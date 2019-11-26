@@ -9,9 +9,6 @@
 //---------- Interface de la classe <Trajet> (fichier Trajet.h) ----------------
 #if ! defined ( TRAJET_H )
 #define TRAJET_H
-#include "TrajetSimple.h"
-#include "TrajetCompose.h"
-
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
@@ -42,9 +39,8 @@ public:
 
     virtual void AfficherTrajet() const = 0;
 
-	virtual bool operator==(TrajetSimple & monTrajet) const = 0;
-
-	virtual bool operator==(TrajetCompose & monTrajet)const = 0;
+    char* getVilleDepart() const;
+    char* getVilleArrivee() const;
 
     // Mode d'emploi :
     // Permet d'afficher le trajet, qu'il soit simple ou composé
@@ -57,8 +53,6 @@ public:
 //-------------------------------------------- Constructeurs - destructeur
 
     Trajet(){};
-
-
 
     Trajet ( const char* depart, const char* arrivee );
     // Mode d'emploi :

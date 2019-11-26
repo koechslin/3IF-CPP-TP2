@@ -9,7 +9,7 @@
 //---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
 #if ! defined (TRAJETSIMPLE_H )
 #define TRAJETSIMPLE_H
-#include "TrajetCompose.h"
+#include "Trajet.h"
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -35,6 +35,9 @@ public:
     // Contrat :
     //
 
+    char* getTransport() const;
+
+    void initTrajet(const char* depart,const char* arrive, const char* moyenTransport);
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -44,12 +47,9 @@ public:
     //
     // Contrat :
     //
+    virtual bool  operator==(TrajetSimple & monTrajet) const ;
 
-	virtual bool operator==(TrajetSimple & monTrajet) const;
-
-	virtual bool operator==(TrajetCompose & monTrajet) const;
-
-    TrajetSimple (){};
+    TrajetSimple ();
     // Mode d'emploi : Constructeur par défaut de TrajetSimple
 
     TrajetSimple (const char* depart,const char* arrive ,const char * moyenTransport);
@@ -58,8 +58,8 @@ public:
     // Contrat :
     //
 
-	virtual void AfficherTrajet() const;
-	// Mode d'emploi : Affiche le trajet correspondant sur la sortie standard: ville de départ, ville d'arrivée, moyen de transport
+	   virtual void AfficherTrajet() const;
+	   // Mode d'emploi : Affiche le trajet correspondant sur la sortie standard: ville de départ, ville d'arrivée, moyen de transport
 
     virtual ~TrajetSimple ( );
     // Mode d'emploi : détruit les différents tableaux de caractères dynamiques attributs de la classe

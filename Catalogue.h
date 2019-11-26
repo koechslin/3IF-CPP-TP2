@@ -24,7 +24,7 @@
 //
 //------------------------------------------------------------------------
 
-class Catalogue 
+class Catalogue
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -35,13 +35,16 @@ public:
     //
     // Contrat :
     //
-	
 
-	void Rechercher(char* depart, char* arrivee);
+	bool ComparerTrajet(Trajet & trajet1, Trajet & trajet2) const;
+
+	void RechercheSimple(char* depart, char* arrivee) const;
 
 	int Ajouter(Trajet  & monTrajet);
 
-	int VerifieCoherenceTrajetCompose(char* depart, char* arrivee, TrajetSimple* listeTrajets, int nbTrajets);
+	void AfficherCatalogue() const;
+
+	//int VerifieCoherenceTrajetCompose(char* depart, char* arrivee, TrajetSimple* listeTrajets, int nbTrajets);
 
 //------------------------------------------------- Surcharge d'opérateurs
     Catalogue & operator = ( const Catalogue & unCatalogue );
@@ -64,10 +67,10 @@ public:
     // Contrat :
     //
 	Catalogue(int nbTrajetsMax);
-	
 
 
-	
+
+
 
 
 
@@ -81,7 +84,7 @@ public:
 	//int GetNbTrajetsAct() { return nbTrajetsAct; }
 	//int GetNbTrajetsMax() { return nbTrajetsMax; }
 
-	
+
 
 //------------------------------------------------------------------ PRIVE
 
@@ -98,4 +101,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <Xxx>
 
 #endif // XXX_H
-

@@ -17,7 +17,6 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Trajet.h"
-
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
@@ -28,6 +27,16 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+
+char* Trajet :: getVilleDepart() const
+{
+  return this->villeDepart;
+}
+
+char* Trajet :: getVilleArrivee() const
+{
+  return this->villeArrivee;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
