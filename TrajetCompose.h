@@ -30,8 +30,8 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose (const char* depart,const char* arrivee,const TrajetSimple* listeTrajet,int nbTrajets);
-    // Mode d'emploi : construit un trajet composé à partir du point de départ, d'arrivée, et de la liste des trajets simples le constituant
+    TrajetCompose (const TrajetSimple* listeTrajet,int nbTrajets);
+    // Mode d'emploi : construit un trajet composé à partir de la liste des trajets simples le constituant
     //
 
     virtual ~TrajetCompose ( );

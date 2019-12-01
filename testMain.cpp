@@ -52,12 +52,30 @@ int main()
 				break;
 			case 2:
 				nbTrajetRentre=0;
-				while(nbTrajetRentre==0 || strcmp(confirmationSuiteTrajet,"oui")==0)
+				cout<<"Entrez la ville de départ"<<endl;
+				scanf("%[^\n]",villeDepart);
+				getchar(); // enlève le "Entrer" du buffer de lecture
+				cout<<"Entrez la ville de arrivée"<<endl;
+				scanf("%[^\n]",villeArrivee);
+				getchar();
+				cout<<"Entrez le moyen de transport"<<endl;
+				scanf("%[^\n]",moyenTransport);
+				getchar();
+
+				++nbTrajetRentre;
+				// on copie le trajet dans le tableau
+				trajetRentres[nbTrajetRentre-1]= TrajetSimple(villeDepart,villeArrivee,moyenTransport);
+
+				cout<<"Le trajet a-t-il une suite ?\n\toui\n\tnon"<<endl;
+				scanf("%s",confirmationSuiteTrajet);
+				getchar();
+
+				while(strcmp(confirmationSuiteTrajet,"oui")==0) // le trajet a une suite
 				{
-					cout<<"Entrez la ville de départ"<<endl;
-					scanf("%[^\n]",villeDepart);
-					getchar(); // enlève le "Entrer" du buffer de lecture
-					cout<<"Entrez la ville de arrivée"<<endl;
+					// si le trajet a une suite, on prend directement comme point de départ la ville d'arrivée du trajet précédent
+					strcpy(villeDepart,villeArrivee);
+					// on ne demande donc que la ville d'arrivée du prochain trajet
+					cout<<"Entrez la ville d'arrivée"<<endl;
 					scanf("%[^\n]",villeArrivee);
 					getchar();
 					cout<<"Entrez le moyen de transport"<<endl;
@@ -65,19 +83,16 @@ int main()
 					getchar();
 
 					++nbTrajetRentre;
-					if(nbTrajetRentre>1)
+					// on agrandit le tableau de trajet
+					TrajetSimple* tableauCopie = new TrajetSimple[nbTrajetRentre];
+					for(int i=0;i<nbTrajetRentre-1;i++)
 					{
-						//agrandit le tableau de trajet
-						TrajetSimple* tableauCopie = new TrajetSimple[nbTrajetRentre];
-						for(int i=0;i<nbTrajetRentre-1;i++)
-						{
-							tableauCopie[i]=trajetRentres[i];
-						}
-						delete[] trajetRentres;
-						trajetRentres = tableauCopie;
+						tableauCopie[i]=trajetRentres[i];
 					}
-
+					delete[] trajetRentres;
+					trajetRentres = tableauCopie;
 					trajetRentres[nbTrajetRentre-1]= TrajetSimple(villeDepart,villeArrivee,moyenTransport);
+
 
 					cout<<"Le trajet a-t-il une suite ?\n\toui\n\tnon"<<endl;
 					scanf("%s",confirmationSuiteTrajet);
@@ -92,7 +107,7 @@ int main()
 				}
 				else //trajet composé
 				{
-					Trajet* ptr_tc = new TrajetCompose(trajetRentres[0].getVilleDepart(),trajetRentres[nbTrajetRentre-1].getVilleArrivee(),trajetRentres,nbTrajetRentre);
+					Trajet* ptr_tc = new TrajetCompose(trajetRentres,nbTrajetRentre);
 					catalogue.Ajouter(ptr_tc);
 				}
 

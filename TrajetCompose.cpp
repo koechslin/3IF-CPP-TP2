@@ -55,8 +55,8 @@ bool TrajetCompose:: operator==(TrajetCompose & monTrajet) const
 //-------------------------------------------- Constructeurs - destructeur
 
 
-TrajetCompose::TrajetCompose(const char* depart, const char* arrivee,const TrajetSimple* listeTrajet, int nbTrajets)
-	:Trajet(depart, arrivee), nbTrajetSimple(nbTrajets)
+TrajetCompose::TrajetCompose(const TrajetSimple* listeTrajet, int nbTrajets)
+	:Trajet(listeTrajet[0].getVilleDepart(), listeTrajet[nbTrajets-1].getVilleArrivee()), nbTrajetSimple(nbTrajets)
 {
 
 	#ifdef MAP
