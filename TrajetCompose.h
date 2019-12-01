@@ -1,27 +1,18 @@
-/*************************************************************************
-                           TrajetCompose  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
 //---------- Interface de la classe <TrajetCompose> (fichier TrajetCompose.h) ----------------
 #if ! defined ( TRAJETCOMPOSE_H )
 #define TRAJETCOMPOSE_H
-#include "Trajet.h"
-#include "TrajetSimple.h"
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include "Trajet.h"
+#include "TrajetSimple.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Xxx>
-//    Cette classe permet de créer un trajet composé, constitué de plusieurs trajets simples,
-//    et d'afficher les trajets simples successifs ainsi que leur moyen de transport associé
+// Rôle de la classe <TrajetCompose>
+// Cette classe permet de modéliser un trajet composé, constitué de plusieurs trajets simples
+//
 //------------------------------------------------------------------------
 
 class TrajetCompose : public Trajet
@@ -30,26 +21,22 @@ class TrajetCompose : public Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
     virtual void AfficherTrajet() const;
-    // Mode d'emploi :
-    //    Affiche l'ensemble des trajets simples, et leur moyen de transport, constituant le trajet composé
+    // Mode d'emploi : Affiche l'ensemble des trajets simples, et leur moyen de transport, constituant le trajet composé
+    //
 
-    virtual bool  operator==(TrajetCompose & monTrajet) const ;
+//------------------------------------------------- Surcharge d'opérateurs
+    bool  operator ==(TrajetCompose & monTrajet) const ;
 
 //-------------------------------------------- Constructeurs - destructeur
 
     TrajetCompose (const char* depart,const char* arrivee,const TrajetSimple* listeTrajet,int nbTrajets);
-    // Mode d'emploi :
-    //    Construit un trajet composé à partir du point de départ, d'arrivée, et de la liste des trajets simples le constituant
+    // Mode d'emploi : construit un trajet composé à partir du point de départ, d'arrivée, et de la liste des trajets simples le constituant
+    //
 
     virtual ~TrajetCompose ( );
-    // Mode d'emploi :
-    //    Détruit le trajet composé en libérant de la mémoire le tableau de trajet simple
+    // Mode d'emploi : détruit le trajet composé en libérant de la mémoire le tableau de trajet simple
+    //
 
 //------------------------------------------------------------------ PRIVE
 
@@ -57,11 +44,11 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    TrajetSimple* listeTrajetSimple;
-	   int nbTrajetSimple;
+    TrajetSimple* listeTrajetSimple; // Tableau contenant les trajet simple composant le trajet composé
+	   int nbTrajetSimple; // Entier indiquant le nombre de trajet simple au sein du trajet composé
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
+//-------------------------------- Autres définitions dépendantes de <TrajetCompose>
 
 #endif // TRAJETCOMPOSE_H

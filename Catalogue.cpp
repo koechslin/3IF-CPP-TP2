@@ -1,11 +1,3 @@
-/*************************************************************************
-                           Catalogue  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
 //---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
@@ -25,11 +17,6 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Catalogue::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 bool Catalogue::ComparerTrajet(Trajet & trajet1, Trajet & trajet2) const
 {
@@ -64,15 +51,14 @@ bool Catalogue::ComparerTrajet(Trajet & trajet1, Trajet & trajet2) const
 	}
 }
 
-int Catalogue::Ajouter(Trajet  & unTrajet) {
+int Catalogue::Ajouter(Trajet* unTrajet) {
 
 	for (int i = 0;i < this->nbTrajetsAct;i++) {
-		if (ComparerTrajet(unTrajet,*(this->listeTrajets[i]))) // vérifie si le trajet est déjà présent
+		if (ComparerTrajet(*unTrajet,*(this->listeTrajets[i]))) // vérifie si le trajet est déjà présent
 		{
 			return 0;
 		}
 	}
-	// ajout du trajet
 	if(this->nbTrajetsAct==this->nbTrajetsMax) // vérifie si la liste a besoin d'être agrandie
 	{
 		this->nbTrajetsMax *= 2;
@@ -84,17 +70,19 @@ int Catalogue::Ajouter(Trajet  & unTrajet) {
 		delete[] listeTrajets;
 		listeTrajets = tableauTemp;
 	}
-	this->listeTrajets[this->nbTrajetsAct] = &unTrajet;
+	// ajout du trajet (grâce à son pointeur)
+	this->listeTrajets[this->nbTrajetsAct] = unTrajet;
 	this->nbTrajetsAct++;
 
 	return 1;
 }
 
-void Catalogue::RechercheSimple(char* depart, char* arrivee) const
+void Catalogue::RechercheSimple(char* depart,char* arrivee) const
 {
 	cout<<"Liste des trajets allant de "<<depart<<" à "<<arrivee<<" : "<<endl;
 	for(int i=0;i<this->nbTrajetsAct;i++)
 	{
+		// on regarde pour chaque trajet si sa ville de départ et sa ville d'arrivée (directe) correspondent à la recherche
 		if(strcmp(this->listeTrajets[i]->getVilleDepart(),depart)==0 &&strcmp(this->listeTrajets[i]->getVilleArrivee(),arrivee)==0)
 		{
 			this->listeTrajets[i]->AfficherTrajet();
@@ -103,74 +91,63 @@ void Catalogue::RechercheSimple(char* depart, char* arrivee) const
 	}
 }
 
-void Catalogue::RechercheCompose(const char* depart,const char* arrivee) const
+void Catalogue::RechercheAvancee(char* depart,char* arrivee) const
 {
-	int* tableHachage = new int [this->nbTrajetsAct];
+	// lance la recherche avancée en initialisant un tableau permettant de retenir les trajets déjà parcourus dans la recherche
+	cout<<"Liste des trajets allant de "<<depart<<" à "<<arrivee<<" : "<<endl;
+	int* tableTrajetDejaParcouru = new int [this->nbTrajetsAct];
 	for (int a = 0;a < this->nbTrajetsAct;a++) {
-		tableHachage[a] = 0;
-
+		tableTrajetDejaParcouru[a] = 0;
 	}
-	Recursive(depart,depart, arrivee, tableHachage,1);
-	delete[]tableHachage;
+	RechercheRecursive(depart,depart, arrivee, tableTrajetDejaParcouru,1);
+	delete[] tableTrajetDejaParcouru;
 
 }
 
+void Catalogue::RechercheRecursive(char* departInitial,char* departActuel,char* arriveeFinale, int* tableTrajetParcouru, int profondeur) const
+{ // Algorithme : recherche en backtracking qui parcourt en profondeur tous les trajets possibles et retient ceux qui partent de "departInitial" et arrivent à "arriveeFinale"
 
-
-void Catalogue::Recursive(const char* departIni,const char* depart, const char* arrivee, int* tableHachage, int pronf) const
-{
-	
 	for (int i = 0;i < this->nbTrajetsAct;i++)
 	{
-		if(strcmp(this->listeTrajets[i]->getVilleArrivee(), departIni) != 0){
-			if (tableHachage[i] == 0 && strcmp(this->listeTrajets[i]->getVilleDepart(), depart) == 0) {
-				if (strcmp(this->listeTrajets[i]->getVilleArrivee(), arrivee) == 0) {
-
-
-					tableHachage[i] = pronf;
-					cout << "Nouveau Trajet" << endl;
-					for (int x = 1;x <= pronf;x++) {
-						for (int z = 0;z < this->nbTrajetsAct;z++) {
-							if (tableHachage[z] == x) {
-								this->listeTrajets[z]->AfficherTrajet();
+		if(strcmp(this->listeTrajets[i]->getVilleArrivee(), departInitial) != 0) // permet de ne pas revenir au point de départ ce qui ne servirait à rien dans la recherche
+		{
+			if (tableTrajetParcouru[i] == 0 && strcmp(this->listeTrajets[i]->getVilleDepart(), departActuel) == 0) // vérifie que l'on n'a pas encore parcouru ce trajet et qu'il part de là où l'on se trouve ("depart")
+			{
+				if (strcmp(this->listeTrajets[i]->getVilleArrivee(), arriveeFinale) == 0) // ce trajet arrive à la destination recherchée ("arrivee")
+				{
+					tableTrajetParcouru[i] = profondeur; // permet l'affichage du trajet "dans l'ordre" grâce à la profondeur à laquelle il se trouve dans la recherche
+					cout << "------ Nouveau Trajet ------" << endl;
+					for (int p = 1;p <= profondeur;p++)
+					{
+						for (int j = 0;j < this->nbTrajetsAct;j++)
+						{
+							if (tableTrajetParcouru[j] == p) // affiche les trajets par ordre de profondeur (de 1 à "profondeur")
+							{
+								this->listeTrajets[j]->AfficherTrajet();
 								cout << endl;
 							}
-
 						}
-
 					}
-					
-	
-					tableHachage[i] = 0;
-
-
+					tableTrajetParcouru[i] = 0; // remet le trajet dans un état "non parcouru" pour la suite de la recherche
 				}
-				else {
-					tableHachage[i] = pronf;
-					Recursive(departIni, this->listeTrajets[i]->getVilleArrivee(), arrivee, tableHachage,pronf+1);
-					tableHachage[i] = 0;
-
-
-
+				else
+				{
+					tableTrajetParcouru[i] = profondeur;
+					RechercheRecursive(departInitial, this->listeTrajets[i]->getVilleArrivee(), arriveeFinale, tableTrajetParcouru,profondeur+1); // si on n'est pas encore arrivé à la destination finale, on relance la méthode à partir de l'arrivée du trajet actuellement considéré
+					tableTrajetParcouru[i] = 0;
 				}
 			}
-			
-
-
-			
-
-		
-			
 		}
 	}
-
 }
-
-
-
 
 void Catalogue::AfficherCatalogue() const
 {
+	if(this->nbTrajetsAct==0)
+	{
+		cout<<"Le catalogue est vide"<<endl;
+		return;
+	}
 	cout<<"Les trajets présents dans le catalogue sont les suivants : "<<endl;
 	for(int i=0;i<this->nbTrajetsAct;i++)
 	{
@@ -180,65 +157,41 @@ void Catalogue::AfficherCatalogue() const
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
-//Catalogue & Catalogue::operator = ( const Catalogue & unCatalogue )
-// Algorithme :
-//
-//{
-//} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Catalogue::Catalogue ( const Catalogue & unCatalogue )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Catalogue>" << endl;
-#endif
-} //----- Fin de Catalogue (constructeur de copie)
-
-
-Catalogue::Catalogue ( )
-// Algorithme :
-//
+Catalogue::Catalogue()
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
 
-	this->listeTrajets = new Trajet* [1];
+	this->listeTrajets = new Trajet* [1]; // par défaut initialise la taille maximale du catalogue à 1
 	this->nbTrajetsMax = 1;
 	this->nbTrajetsAct = 0;
-
-
-} //----- Fin de Catalogue
+} //----- Fin de Catalogue (constructeur par défaut)
 
 Catalogue::Catalogue(int nbTrajetsMax)
-// Algorithme :
-//
 {
 #ifdef MAP
 	cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
 
-	this->listeTrajets = new Trajet * [nbTrajetsMax];
+	this->listeTrajets = new Trajet * [nbTrajetsMax]; // initialise la taille maximale du catalogue à la taille indiquée en paramètre
 	this->nbTrajetsMax = nbTrajetsMax;
 	this->nbTrajetsAct = 0;
-
-
 } //----- Fin de Catalogue
 
-
-
-
-Catalogue::~Catalogue ( )
-// Algorithme :
-//
+Catalogue::~Catalogue()
 {
+	#ifdef MAP
+	    cout << "Appel au destructeur de <Catalogue>" << endl;
+	#endif
+	for(int i=0;i<this->nbTrajetsAct;i++)
+	{
+		delete this->listeTrajets[i]; // détruit chaque trajet présent dans le catalogue
+	}
 	delete[] this->listeTrajets;
-#ifdef MAP
-    cout << "Appel au destructeur de <Catalogue>" << endl;
-#endif
 } //----- Fin de ~Catalogue
 
 

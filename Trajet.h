@@ -1,11 +1,3 @@
-/*************************************************************************
-                           Trajet  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
 //---------- Interface de la classe <Trajet> (fichier Trajet.h) ----------------
 #if ! defined ( TRAJET_H )
 #define TRAJET_H
@@ -17,7 +9,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Trajet>
-//
+// Classe purement abstraite et classe mère de TrajetSimple et TrajetCompose,
+// permettant de regrouper les caractéristiques communes de ces 2 classes
 //
 //------------------------------------------------------------------------
 
@@ -27,40 +20,36 @@ class Trajet
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-	//Trajet& Trajet::operator = (const Trajet& unTrajet);
-		// Algorithme :
-		//
-	//
 
-    virtual void AfficherTrajet() const = 0;
+    virtual void AfficherTrajet() const=0;
+    // Mode d'emploi : permet d'afficher les caractéristiques propres à un trajet (Simple ou Composé)
+    //
+    // Contrat : doit être redéfinie dans les classes filles TrajetSimple et TrajetCompose
 
     char* getVilleDepart() const;
-    char* getVilleArrivee() const;
-
-    // Mode d'emploi :
-    // Permet d'afficher le trajet, qu'il soit simple ou composé
+    // Mode d'emploi : renvoie la ville de départ du trajet
     //
-    // Contrat :
-    // La méthode doit être redéfinie dans les classes filles
+
+    char* getVilleArrivee() const;
+    // Mode d'emploi : renvoie la ville d'arrivée du trajet
+    //
 
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Trajet(){};
+    Trajet();
+    // Mode d'emploi : constructeur par défaut de Trajet qui initialise "villeDepart" et "villeArrivee" comme étant des "nullptr"
+    //
+    // Contrat : Il ne faut pas utiliser directement un trajet crée avec ce constructeur
 
     Trajet ( const char* depart, const char* arrivee );
-    // Mode d'emploi :
-    //  Initialise la ville de départ et d'arrivée
+    // Mode d'emploi : initialise la ville de départ et d'arrivée grâce aux paramètres données
+    //
 
     virtual ~Trajet ( );
-    // Mode d'emploi :
-    // Libère la mémoire utilisée par villeDepart et villeArrivee
+    // Mode d'emploi : libère la mémoire utilisée par villeDepart et villeArrivee
+    //
 
 //------------------------------------------------------------------ PRIVE
 
@@ -68,8 +57,8 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    char* villeDepart;
-    char* villeArrivee;
+    char* villeDepart; // ville de départ du trajet
+    char* villeArrivee; // ville d'arrivée du trajet
 };
 
 //-------------------------------- Autres définitions dépendantes de <Trajet>

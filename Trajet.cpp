@@ -1,11 +1,3 @@
-/*************************************************************************
-                           Trajet  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
 //---------- Réalisation de la classe <Trajet> (fichier Trajet.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
@@ -22,11 +14,6 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Trajet::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 char* Trajet :: getVilleDepart() const
 {
@@ -43,10 +30,13 @@ char* Trajet :: getVilleArrivee() const
 
 //-------------------------------------------- Constructeurs - destructeur
 
+Trajet::Trajet()
+{
+  this->villeDepart=nullptr;
+  this->villeArrivee=nullptr;
+} //----- Fin de Trajet (constructeur par défaut)
 
 Trajet::Trajet ( const char* depart, const char* arrivee )
-// Algorithme :
-//  Aucun
 {
   #ifdef MAP
       cout << "Appel au constructeur de <Trajet>" << endl;
@@ -60,8 +50,6 @@ Trajet::Trajet ( const char* depart, const char* arrivee )
 
 
 Trajet::~Trajet ( )
-// Algorithme :
-// Aucun
 {
   #ifdef MAP
       cout << "Appel au destructeur de <Trajet>" << endl;

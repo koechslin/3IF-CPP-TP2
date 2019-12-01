@@ -1,13 +1,3 @@
-
-
-/*************************************************************************
-						   TrajetCompose  -  description
-							 -------------------
-	début                : $DATE$
-	copyright            : (C) $YEAR$ par $AUTHOR$
-	e-mail               : $EMAIL$
-*************************************************************************/
-
 //---------- Réalisation de la classe <TrajetCompose> (fichier TrajetCompose.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
@@ -27,53 +17,45 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type TrajetCompose::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
+void TrajetCompose::AfficherTrajet() const
+// Algorithme : affiche le trajet composé en appelant à tour de rôle les méthodes AfficherTrajet() de chaque trajet simple le composant
+//
+{
+	for (int i = 0;i < this->nbTrajetSimple;i++)
+	{
+		this->listeTrajetSimple[i].AfficherTrajet();
+
+		if (i != (this->nbTrajetSimple - 1)) // si ce n'est pas le dernier trajet simple, affiche un "-" pour séparer les affichages
+		{
+				cout << " -";
+		}
+	}
+}
+//------------------------------------------------- Surcharge d'opérateurs
 
 bool TrajetCompose:: operator==(TrajetCompose & monTrajet) const
+// Algorithme : compare 2 trajets composés en vérifier l'égalité entre chaque trajets simples les composant
+//
 {
-	if (this->nbTrajetSimple == monTrajet.nbTrajetSimple) {
-		for (int i = 0;i < this->nbTrajetSimple;i++) {
-			if (this->listeTrajetSimple[i] == monTrajet.listeTrajetSimple[i]) {
-				continue;
-			}
-			else {
+	if (this->nbTrajetSimple == monTrajet.nbTrajetSimple)  // si ils n'ont pas la même "cardinalité" ils ne peuvent pas être égaux
+	{
+		for (int i = 0;i < this->nbTrajetSimple;i++)
+		{
+			if (this->listeTrajetSimple[i] != monTrajet.listeTrajetSimple[i])
+			{
 				return false;
 			}
 		}
 		return true;
 	}
 	return false;
-
-
 }
-
-
-void TrajetCompose::AfficherTrajet() const
-// Algorithme :
-// Aucun
-{
-	int i = 0;
-	for (i = 0;i < this->nbTrajetSimple;i++)
-	{
-		this->listeTrajetSimple[i].AfficherTrajet();
-		if (i != (this->nbTrajetSimple - 1))
-			cout << " -";
-	}
-}
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
 
 TrajetCompose::TrajetCompose(const char* depart, const char* arrivee,const TrajetSimple* listeTrajet, int nbTrajets)
-// Algorithme :
-//    Aucun
-
 	:Trajet(depart, arrivee), nbTrajetSimple(nbTrajets)
 {
 
@@ -81,32 +63,23 @@ TrajetCompose::TrajetCompose(const char* depart, const char* arrivee,const Traje
 		cout << "Appel au constructeur de <TrajetCompose>" << endl;
 	#endif
 
-	cout<<"1"<<endl;
 	this->listeTrajetSimple = new TrajetSimple[nbTrajets];
-	cout<<"2"<<endl;
-	/*for (int i = 0;i < nbTrajets;i++)
-	{
-		this->listeTrajetSimple[i] = (listeTrajet[i]);
-	}*/
 	for(int i=0;i<nbTrajets;i++)
 	{
-		cout<<"3"<<endl;
-		//TrajetSimple trajetTemp = TrajetSimple(listeTrajet[i].getVilleDepart(),listeTrajet[i].getVilleArrivee(),listeTrajet[i].getTransport());
-		this->listeTrajetSimple[i].initTrajet(listeTrajet[i].getVilleDepart(),listeTrajet[i].getVilleArrivee(),listeTrajet[i].getTransport());
-		cout<<"4"<<endl;
+		this->listeTrajetSimple[i] = listeTrajet[i];
 	}
 
 } //----- Fin de TrajetCompose
 
 
 TrajetCompose::~TrajetCompose()
-// Algorithme :
-//  Aucun
 {
 #ifdef MAP
 	cout << "Appel au destructeur de <TrajetCompose>" << endl;
 #endif
+
 	delete[] this->listeTrajetSimple;
+
 } //----- Fin de ~TrajetCompose
 
 

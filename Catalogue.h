@@ -1,18 +1,10 @@
-/*************************************************************************
-                           Catalogue  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
 //---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------------
-#if ! defined ( Catalogue_H )
-#define Catalogue_H
+#if ! defined ( CATALOGUE_H )
+#define CATALOGUE_H
+//--------------------------------------------------- Interfaces utilisées
 #include "Trajet.h"
 #include "TrajetSimple.h"
 #include "TrajetCompose.h"
-//--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
 
@@ -20,8 +12,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Catalogue>
-//
-//
+// Cette classe va servir à retenir les trajets rentrés par l'utilisateur dans un tableau dédié, mais également lui permet d'afficher tous les trajets disponibles
+// ou d'effectuer une recherche (simple ou avancée) pour un voyage donné (défini par une ville de départ et d'arrivée) des trajets qui répondent à la demande
 //------------------------------------------------------------------------
 
 class Catalogue
@@ -30,62 +22,47 @@ class Catalogue
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 	bool ComparerTrajet(Trajet & trajet1, Trajet & trajet2) const;
+	// Mode d'emploi : cette méthode permet de comparer 2 trajets indépendemment de leur nature
+	//
+	// Contrat : Les paramètres utilisés doivent être obligatoirement soit de type TrajetSimple, soit de type TrajetCompose
 
-	void RechercheSimple(char* depart, char* arrivee) const;
-	void RechercheCompose(const char* depart,const char* arrivee) const;
-	void Recursive(const char* departIni,const char* depart, const char* arrivee, int* tableHachage,int pronf) const;
-
-	int Ajouter(Trajet  & monTrajet);
+	int Ajouter(Trajet* monTrajet);
+	// Mode d'emploi : Permet de rajouter dans le catalogue un trajet (simple ou composé) via passage en paramètre d'un pointeur de type Trajet
+	//
+	// Contrat : Le trajet pointé par "monTrajet" doit être de type TrajetSimple ou TrajetCompose
 
 	void AfficherCatalogue() const;
+	// Mode d'emploi : Affiche tous les trajets contenus dans le catalogue
+	//
 
-	//int VerifieCoherenceTrajetCompose(char* depart, char* arrivee, TrajetSimple* listeTrajets, int nbTrajets);
+	void RechercheSimple(char* depart,char* arrivee) const;
+	// Mode d'emploi : Recherche dans le catalogue les trajets qui partent de "depart" et qui arrive directement à "arrivee"
+	//
+
+	void RechercheAvancee(char* depart,char* arrivee) const;
+	// Mode d'emploi : Recherche dans le catalogue les trajets ou combinaisons de trajets qui partent de "depart" et qui arrive à "arrivee"
+	//
+
+	void RechercheRecursive(char* departInitial,char* departActuel,char* arriveeFinale, int* tableTrajetParcouru, int profondeur) const;
+	// Mode d'emploi : Méthode utilisée dans RechercheAvancee qui permet de parcourir en profondeur les trajets pour trouver ceux correspondant à la recherche
+	//
 
 //------------------------------------------------- Surcharge d'opérateurs
-   // Catalogue & operator = ( const Catalogue & unCatalogue );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Catalogue ( const Catalogue & unCatalogue );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
+    Catalogue();
+		// Mode d'emploi : Crée le catalogue en initialisant la liste de trajets (avec par défaut une taille de 1)
+		//
 
-    Catalogue ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-	Catalogue(int nbTrajetsMax);
+		Catalogue(int nbTrajetsMax);
+		// Mode d'emploi : Crée le catalogue en indiquant une taille maximale initiale pour le catalogue
+		//
 
-
-
-
-
-
-
-    virtual ~Catalogue ( );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-	//Trajet** getListeTrajets() { return listeTrajets; }
-	//int GetNbTrajetsAct() { return nbTrajetsAct; }
-	//int GetNbTrajetsMax() { return nbTrajetsMax; }
-
+    virtual ~Catalogue();
+		//
 
 
 //------------------------------------------------------------------ PRIVE
@@ -94,12 +71,12 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	Trajet** listeTrajets;
-	int nbTrajetsMax;
-	int nbTrajetsAct;
+	Trajet** listeTrajets; // tableau qui permet le stockage (grâce à des pointeurs) des trajets présents dans le catalogue
+	int nbTrajetsMax; // taille du tableau listeTrajets
+	int nbTrajetsAct; // nombre de trajets effectivement stockés
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Xxx>
+//-------------------------------- Autres définitions dépendantes de <Catalogue>
 
-#endif // XXX_H
+#endif // CATALOGUE_H
