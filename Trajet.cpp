@@ -30,12 +30,6 @@ char* Trajet :: getVilleArrivee() const
 
 //-------------------------------------------- Constructeurs - destructeur
 
-Trajet::Trajet()
-{
-  this->villeDepart=nullptr;
-  this->villeArrivee=nullptr;
-} //----- Fin de Trajet (constructeur par défaut)
-
 Trajet::Trajet ( const char* depart, const char* arrivee )
 {
   #ifdef MAP

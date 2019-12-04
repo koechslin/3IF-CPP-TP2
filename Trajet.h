@@ -38,11 +38,6 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    Trajet();
-    // Mode d'emploi : constructeur par défaut de Trajet qui initialise "villeDepart" et "villeArrivee" comme étant des "nullptr"
-    //
-    // Contrat : Il ne faut pas utiliser directement un trajet crée avec ce constructeur
-
     Trajet ( const char* depart, const char* arrivee );
     // Mode d'emploi : initialise la ville de départ et d'arrivée grâce aux paramètres données
     //

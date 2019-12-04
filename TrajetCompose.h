@@ -26,15 +26,14 @@ public:
     //
 
 //------------------------------------------------- Surcharge d'opérateurs
-    bool  operator ==(TrajetCompose & monTrajet) const ;
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    TrajetCompose (const TrajetSimple* listeTrajet,int nbTrajets);
+    TrajetCompose (Trajet** listeTrajet,int nbTrajets);
     // Mode d'emploi : construit un trajet composé à partir de la liste des trajets simples le constituant
     //
 
-    virtual ~TrajetCompose ( );
+    virtual ~TrajetCompose ();
     // Mode d'emploi : détruit le trajet composé en libérant de la mémoire le tableau de trajet simple
     //
 
@@ -44,8 +43,8 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    TrajetSimple* listeTrajetSimple; // Tableau contenant les trajet simple composant le trajet composé
-	   int nbTrajetSimple; // Entier indiquant le nombre de trajet simple au sein du trajet composé
+    Trajet** listeTrajets; // Tableau contenant les trajet simple composant le trajet composé
+	   int nbTrajets; // Entier indiquant le nombre de trajet simple au sein du trajet composé
 
 };
 

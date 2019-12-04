@@ -29,21 +29,7 @@ public:
 
 //------------------------------------------------- Surcharge d'opérateurs
 
-    TrajetSimple & operator =(const TrajetSimple & trajet);
-
-    bool  operator ==(TrajetSimple & monTrajet) const ;
-
-    bool operator !=(TrajetSimple & monTrajet) const;
-
 //-------------------------------------------- Constructeurs - destructeur
-    TrajetSimple ( const TrajetSimple & unTrajetSimple );
-    // Mode d'emploi (constructeur de copie) : crée une copie du trajet simple passé en paramètre
-    //
-
-    TrajetSimple ();
-    // Mode d'emploi : Constructeur par défaut de TrajetSimple
-    //
-
     TrajetSimple (const char* depart,const char* arrive ,const char * moyenTransport);
     // Mode d'emploi : Construit un trajet simple qui contient une ville de départ, une ville d'arrivée et un moyen de transport
     //

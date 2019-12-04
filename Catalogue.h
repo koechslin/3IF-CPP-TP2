@@ -23,11 +23,6 @@ class Catalogue
 public:
 //----------------------------------------------------- Méthodes publiques
 
-	bool ComparerTrajet(Trajet & trajet1, Trajet & trajet2) const;
-	// Mode d'emploi : cette méthode permet de comparer 2 trajets indépendemment de leur nature
-	//
-	// Contrat : Les paramètres utilisés doivent être obligatoirement soit de type TrajetSimple, soit de type TrajetCompose
-
 	int Ajouter(Trajet* monTrajet);
 	// Mode d'emploi : Permet de rajouter dans le catalogue un trajet (simple ou composé) via passage en paramètre d'un pointeur de type Trajet
 	//
@@ -57,10 +52,6 @@ public:
 		// Mode d'emploi : Crée le catalogue en initialisant la liste de trajets (avec par défaut une taille de 1)
 		//
 
-		Catalogue(int nbTrajetsMax);
-		// Mode d'emploi : Crée le catalogue en indiquant une taille maximale initiale pour le catalogue
-		//
-
     virtual ~Catalogue();
 		//
 
@@ -71,7 +62,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-	Trajet** listeTrajets; // tableau qui permet le stockage (grâce à des pointeurs) des trajets présents dans le catalogue
+	Trajet** listeTrajetsCatalogue; // tableau qui permet le stockage (grâce à des pointeurs) des trajets présents dans le catalogue
 	int nbTrajetsMax; // taille du tableau listeTrajets
 	int nbTrajetsAct; // nombre de trajets effectivement stockés
 
