@@ -14,11 +14,6 @@ $(MAIN) : $(OBJS)
 %.o : %.cpp
 	$(CC) $(CFLAGS) -c $^
 
-.PHONY : touch
-
-touch :
-	touch $(SRCS)
-
 .PHONY : launch
 
 launch :

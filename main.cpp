@@ -19,7 +19,6 @@ int main()
 	char moyenTransport[100]; // stocke le moyen de transport rentré par l'utilisateur
 	char confirmationSuiteTrajet[50]; // permet d'enchaîner plusieurs trajets simples dans le cas de la saisie d'un trajet composé
 	Trajet** trajetRentres=new Trajet*[1]; // stocke les trajets saisis (par défaut le tableau est de taille 1)
-	Trajet* trajetTemp;
 
 	while(1)
 	{
@@ -63,8 +62,7 @@ int main()
 
 				++nbTrajetRentre;
 				// on copie le trajet dans le tableau
-				trajetTemp = new TrajetSimple(villeDepart,villeArrivee,moyenTransport);
-				trajetRentres[nbTrajetRentre-1]=trajetTemp;
+				trajetRentres[nbTrajetRentre-1]=new TrajetSimple(villeDepart,villeArrivee,moyenTransport);
 
 				cout<<"Le trajet a-t-il une suite ?\n\toui\n\tnon"<<endl;
 				scanf("%s",confirmationSuiteTrajet);
@@ -91,8 +89,7 @@ int main()
 					}
 					delete[] trajetRentres;
 					trajetRentres = tableauCopie;
-					trajetTemp = new TrajetSimple(villeDepart,villeArrivee,moyenTransport);
-					trajetRentres[nbTrajetRentre-1]= trajetTemp;
+					trajetRentres[nbTrajetRentre-1]= new TrajetSimple(villeDepart,villeArrivee,moyenTransport);
 
 
 					cout<<"Le trajet a-t-il une suite ?\n\toui\n\tnon"<<endl;

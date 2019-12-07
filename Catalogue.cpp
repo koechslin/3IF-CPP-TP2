@@ -39,12 +39,13 @@ int Catalogue::Ajouter(Trajet* unTrajet) {
 
 void Catalogue::RechercheSimple(char* depart,char* arrivee) const
 {
-	cout<<"Liste des trajets allant de "<<depart<<" à "<<arrivee<<" : "<<endl;
+	cout<<"==== Liste des trajets allant de "<<depart<<" à "<<arrivee<<" : ===="<<endl;
 	for(int i=0;i<this->nbTrajetsAct;i++)
 	{
 		// on regarde pour chaque trajet si sa ville de départ et sa ville d'arrivée (directe) correspondent à la recherche
 		if(strcmp(this->listeTrajetsCatalogue[i]->getVilleDepart(),depart)==0 &&strcmp(this->listeTrajetsCatalogue[i]->getVilleArrivee(),arrivee)==0)
 		{
+			cout << "------ Nouveau Trajet ------" << endl;
 			this->listeTrajetsCatalogue[i]->AfficherTrajet();
 			cout<<endl;
 		}
@@ -54,7 +55,7 @@ void Catalogue::RechercheSimple(char* depart,char* arrivee) const
 void Catalogue::RechercheAvancee(char* depart,char* arrivee) const
 {
 	// lance la recherche avancée en initialisant un tableau permettant de retenir les trajets déjà parcourus dans la recherche
-	cout<<"Liste des trajets allant de "<<depart<<" à "<<arrivee<<" : "<<endl;
+	cout<<"==== Liste des trajets allant de "<<depart<<" à "<<arrivee<<" : ===="<<endl;
 	int* tableTrajetDejaParcouru = new int [this->nbTrajetsAct];
 	for (int a = 0;a < this->nbTrajetsAct;a++) {
 		tableTrajetDejaParcouru[a] = 0;
@@ -66,7 +67,6 @@ void Catalogue::RechercheAvancee(char* depart,char* arrivee) const
 
 void Catalogue::RechercheRecursive(char* departInitial,char* departActuel,char* arriveeFinale, int* tableTrajetParcouru, int profondeur) const
 { // Algorithme : recherche en backtracking qui parcourt en profondeur tous les trajets possibles et retient ceux qui partent de "departInitial" et arrivent à "arriveeFinale"
-
 	for (int i = 0;i < this->nbTrajetsAct;i++)
 	{
 		if(strcmp(this->listeTrajetsCatalogue[i]->getVilleArrivee(), departInitial) != 0) // permet de ne pas revenir au point de départ ce qui ne servirait à rien dans la recherche
