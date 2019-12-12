@@ -48,6 +48,7 @@ int main()
 				catalogue.AfficherCatalogue();
 				cout<<endl;
 				break;
+
 			case 2:
 				nbTrajetRentre=0;
 				cout<<"Entrez la ville de départ"<<endl;
@@ -123,6 +124,7 @@ int main()
 				catalogue.RechercheSimple(villeDepart,villeArrivee);
 				cout<<endl;
 				break;
+
 			case 4:
 				cout<<"Recherche complexe de parcours : "<<endl;
 				cout<<"Entrez la ville de départ : ";
@@ -133,6 +135,7 @@ int main()
 				catalogue.RechercheAvancee(villeDepart,villeArrivee);
 				cout<<endl;
 				break;
+				
 			case 5:
 				// fin du programme, on libère la zone mémoire utilisée
 				delete[] trajetRentres;

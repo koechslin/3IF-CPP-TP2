@@ -1,3 +1,10 @@
+/*************************************************************************
+                           Catalogue  -  description
+                             -------------------
+    début                : novembre 2019
+    copyright            : (C) 2019 par Killian OECHSLIN et Thomas MIGNOT
+*************************************************************************/
+
 //---------- Interface de la classe <Catalogue> (fichier Catalogue.h) ----------------
 #if ! defined ( CATALOGUE_H )
 #define CATALOGUE_H
@@ -24,7 +31,7 @@ public:
 //----------------------------------------------------- Méthodes publiques
 
 	int Ajouter(Trajet* monTrajet);
-	// Mode d'emploi : Permet de rajouter dans le catalogue un trajet (simple ou composé) via passage en paramètre d'un pointeur de type Trajet
+	// Mode d'emploi : Permet de rajouter dans le catalogue un trajet (simple ou composé) via passage en paramètre de son pointeur (de type Trajet)
 	//
 	// Contrat : Le trajet pointé par "monTrajet" doit être de type TrajetSimple ou TrajetCompose
 

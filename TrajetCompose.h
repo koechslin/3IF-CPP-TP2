@@ -1,3 +1,10 @@
+/*************************************************************************
+                           TrajetCompose  -  description
+                             -------------------
+    début                : novembre 2019
+    copyright            : (C) 2019 par Killian OECHSLIN et Thomas MIGNOT
+*************************************************************************/
+
 //---------- Interface de la classe <TrajetCompose> (fichier TrajetCompose.h) ----------------
 #if ! defined ( TRAJETCOMPOSE_H )
 #define TRAJETCOMPOSE_H

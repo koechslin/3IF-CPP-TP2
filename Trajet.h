@@ -1,3 +1,10 @@
+/*************************************************************************
+                           Trajet  -  description
+                             -------------------
+    début                : novembre 2019
+    copyright            : (C) 2019 par Killian OECHSLIN et Thomas MIGNOT
+*************************************************************************/
+
 //---------- Interface de la classe <Trajet> (fichier Trajet.h) ----------------
 #if ! defined ( TRAJET_H )
 #define TRAJET_H

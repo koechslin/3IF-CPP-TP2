@@ -1,3 +1,10 @@
+/*************************************************************************
+                           TrajetSimple  -  description
+                             -------------------
+    début                : novembre 2019
+    copyright            : (C) 2019 par Killian OECHSLIN et Thomas MIGNOT
+*************************************************************************/
+
 //---------- Interface de la classe <TrajetSimple> (fichier TrajetSimple.h) ----------------
 #if ! defined (TRAJETSIMPLE_H )
 #define TRAJETSIMPLE_H
@@ -9,7 +16,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <trajetSimple>
-// Cette classe permet de modéliser un trajet simple, c'est à dire un trajet élémentaire partant d'une ville A à une ville B avec 1 seul moyen de transport
+// Cette classe permet de modéliser un trajet simple, c'est à dire un trajet élémentaire
+// partant d'une ville A et allant à une ville B avec 1 seul moyen de transport
 //
 //------------------------------------------------------------------------
 
